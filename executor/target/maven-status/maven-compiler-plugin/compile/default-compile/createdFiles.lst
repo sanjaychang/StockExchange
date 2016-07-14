@@ -1,0 +1,9 @@
+quickfix\examples\executor\IOI.class
+quickfix\examples\executor\MarketDataProvider.class
+quickfix\examples\executor\IOIset.class
+quickfix\examples\executor\Instrument.class
+quickfix\examples\executor\Application$1.class
+quickfix\examples\executor\Application.class
+quickfix\examples\executor\InstrumentSet.class
+quickfix\examples\executor\Executor.class
+quickfix\examples\executor\Application$IOIsender.class

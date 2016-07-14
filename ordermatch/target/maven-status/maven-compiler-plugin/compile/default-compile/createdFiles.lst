@@ -1,0 +1,6 @@
+quickfix\examples\ordermatch\Application.class
+quickfix\examples\ordermatch\Main.class
+quickfix\examples\ordermatch\Order.class
+quickfix\examples\ordermatch\Market.class
+quickfix\examples\ordermatch\OrderMatcher.class
+quickfix\examples\ordermatch\IdGenerator.class

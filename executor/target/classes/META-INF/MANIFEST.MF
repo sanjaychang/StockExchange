@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1468490433525
+Build-Jdk: 1.8.0_60
+Built-By: Sanjay Chang
+Bundle-Description: QuickFIX/J example application - Executor
+Bundle-License: http://www.quickfixj.org/documentation/license.html
+Bundle-ManifestVersion: 2
+Bundle-Name: QuickFIX/J Examples - Executor
+Bundle-SymbolicName: org.quickfixj.StockExchange-executor
+Bundle-Version: 1.6.2
+Class-Path: ./quickfixj-core-1.6.2.jar ./quickfixj-messages-all-1.6.2.ja
+ r ./lib/quickfixj-core-1.6.2.jar ./lib/mina-core-2.0.13.jar ./lib/quick
+ fixj-messages-all-1.6.2.jar ./lib/slf4j-api-1.7.19.jar ./lib/slf4j-jdk1
+ 4-1.7.19.jar
+Created-By: Apache Maven Bundle Plugin
+Export-Package: quickfix.examples.executor;version="1.6.2";uses:="javax.
+ management,org.xml.sax,org.xml.sax.helpers,quickfix,quickfix.field,quic
+ kfix.fix40,quickfix.fix41,quickfix.fix42,quickfix.fix43,quickfix.fix44,
+ quickfix.fix50"
+Implementation-Title: QuickFIX/J Examples - Executor
+Implementation-Vendor-Id: org.quickfixj
+Implementation-Version: 1.6.2
+Import-Package: javax.management,javax.xml.parsers,org.quickfixj.jmx;ver
+ sion="[1.6,2)",org.slf4j;version="[1.7,2)",org.xml.sax,org.xml.sax.help
+ ers,quickfix,quickfix.field;version="[1.6,2)",quickfix.fix40,quickfix.f
+ ix41,quickfix.fix42,quickfix.fix43,quickfix.fix44,quickfix.fix50,quickf
+ ix.mina.acceptor;version="[1.6,2)"
+Main-Class: quickfix.examples.executor.Executor
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-2.3.0.201405100607
