@@ -32,3 +32,73 @@ GO
 SELECT campaign_date
 FROM myTable
 WHERE DATEDIFF(d, campaign_date, getdate()) >= 90
+
+5 8 * * 6 would run 8:05 every Saturday.
+
+
+Cron Entry would be something like :
+
+00,30 * * * * . /home/oracle/.bash_profile; /home/oracle/scripts/stored_proc.sh >> /var/tmp/stored_procs.log 2>&1
+
+where 
+"00,30" are the minutes the job runs at 
+" * * * *"  is every day of every month...
+". /home/oracle/.bash_profile"  - this bit sets the Oracle profile for use by Cron - substutute your env script here
+"home/oracle/scripts/stored_proc.sh " is the job you want to run
+">> /var/tmp/stored_procs.log " means log all output from the job in var/tmp
+"2>&1" means log any error messages in the same log file (see previous line)
+
+
+Your Stored Procedure Job would look something like :
+
+#!/bin/ksh
+PW=scott/tiger
+sqlplus -s << EOF
+$PW
+set serveroutput on
+exec your_stored_procedure ;
+exit
+EOF
+
+The user/password is coded in the script so that the password will not show up if a ps -ef  | grep sqlplus is issued by User (!) Of course would be better if the user/password was stoerd in a hidden Unix file and then the script reads this file for the logon credentials..
+
+Any output issued by your stored_proc will be output to /var/tmp/stored_procs.log (see Cron example above)
+
+sqlplus "userid/pwd" @file.sql
+
+and file.sql has the following statement:
+
+exec my_storedProc;
+
+sqlplus "userid/pwd" <<!
+set serveroutput on size 1000000
+exec my_storedProc;
+!
+
+
+=======================================
+Create a xxxx.sql file and execute it like this:
+
+set serveroutput on;
+execute STORED_PROCEDURE;
+set serveroutput off;
+exit
+You will need a way to execute your script, I use CRON on *nix based systems. My script looks something like this
+
+#!/bin/sh
+# This short shell script calls the XXXX Stored Procedure
+# drive.
+PATH=$PATH:/opt/oracle/local/bin:/usr/local/bin
+export ORACLE_SID=XXXX;   
+export ORAENV_ASK=NO;      
+export TWO_TASK=XXXXXXXXX;    
+. /usr/local/bin/oraenv
+sqlplus USERID/PASSWPRD @SQL_Script_to_call_stored_Proceudre.sql
+exit 
+===============================================
+
+If you want to setup a cron to execute the procedure then you will have to  write the shell script to connect the database and execute the procedure.
+then call the shell script file inside the cron script.
+eg:
+25 14 * * * /path of the shell script/filename.sh
+========================================================
