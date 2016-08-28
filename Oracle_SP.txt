@@ -1,0 +1,34 @@
+SELECT *
+  FROM YOUR_TABLE
+ WHERE creation_date <= TRUNC(SYSDATE) - 30
+SYSDATE returns the date & time; TRUNC resets the date to being as of midnight so you can omit it if you want the creation_date that is 30 days previous including the current time.
+
+Depending on your needs, you could also look at using ADD_MONTHS:
+
+SELECT *
+  FROM YOUR_TABLE
+ WHERE creation_date <= ADD_MONTHS(TRUNC(SYSDATE), -1)
+ 
+ 
+ UPDATE  mytable
+SET     campaign_status = 6
+WHERE   campaign_Date <= DATEADD(day, -90, GETDATE())
+
+UPDATE MESSAGE_LOG
+SET INPROGRESS ='A'
+WHERE creation_date <= TRUNC(SYSDATE) - 30
+
+
+
+CREATE PROC sp_Campaign_Archive AS
+
+    UPDATE [Campaign Table]
+    SET Campaign_Status = 6
+    WHERE DateDiff(day,Campaign_Date,GetDate()) >= 90
+
+GO
+
+
+SELECT campaign_date
+FROM myTable
+WHERE DATEDIFF(d, campaign_date, getdate()) >= 90
